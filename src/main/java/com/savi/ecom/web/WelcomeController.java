@@ -31,7 +31,7 @@ public class WelcomeController {
 
 		model.put("username", userid);
 		
-		return "home";
+		return "homepage";
 	}
 
 	
