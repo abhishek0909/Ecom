@@ -12,5 +12,9 @@
   <input type="submit" value="Submit">
 </form>
 
+
+
+<a href="forgotPassword">Forgot Password</a> 
+
 </body>
 </html>

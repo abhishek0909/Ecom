@@ -10,16 +10,16 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.savi.ecom.service.HelloWorldService;
+import com.savi.ecom.service.LoginService;
 
 @Controller
 public class WelcomeController {
 
 	private final Logger logger = LoggerFactory.getLogger(WelcomeController.class);
-	private final HelloWorldService helloWorldService;
+	private final LoginService helloWorldService;
 
 	@Autowired
-	public WelcomeController(HelloWorldService helloWorldService) {
+	public WelcomeController(LoginService helloWorldService) {
 		this.helloWorldService = helloWorldService;
 	}
 
@@ -44,5 +44,31 @@ public class WelcomeController {
 	}
 
 	
+	@RequestMapping(value = "validateEmail", method = RequestMethod.POST)
+	public String validateEmail(@RequestParam("email") String email,
+			 Map<String, Object> model) {
 
+		logger.debug("validateEmail() is executed!");
+
+		boolean success = helloWorldService.validateEmail(email);
+		
+		model.put("forgotPasswordEmail", email);
+		
+		return "forgotPasswordConfirmation";
+		
+	}
+
+	@RequestMapping(value = "forgotPassword", method = RequestMethod.GET)
+	public String forgotPassword( Map<String, Object> model) {
+
+		logger.debug("login() is executed!");
+
+		
+		return "forgotPasswordView";
+		
+	}
+	
+	
+	
+	
 }
