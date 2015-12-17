@@ -1,32 +1,30 @@
 package com.savi.ecom.service;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
-import org.springframework.util.StringUtils;
 
 @Service
 public class HelloWorldService {
 
 	private static final Logger logger = LoggerFactory.getLogger(HelloWorldService.class);
 
-	public String getDesc() {
-
-		logger.debug("getDesc() is executed!");
-
-		return "Gradle + Spring MVC Hello World Example";
-
-	}
-
-	public String getTitle(String name) {
-
-		logger.debug("getTitle() is executed! $name : {}", name);
-
-		if(StringUtils.isEmpty(name)){
-			return "Hello World";
-		}else{
-			return "Hello " + name;
-		}
+    private static final List<String> users= new ArrayList<String>();
+    
+    public HelloWorldService(){
+    	
+    	users.add("abhishek");
+    	users.add("gaurav");
+    }
+	
+	public boolean validate(String userid, String passwd) {
+		// TODO Auto-generated method stub
+		
+		return users.contains(userid);
+		
 		
 	}
 

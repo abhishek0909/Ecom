@@ -29,9 +29,18 @@ public class WelcomeController {
 
 		logger.debug("login() is executed!");
 
+		boolean success = helloWorldService.validate(userid,passwd);
+		
+		if(success){
 		model.put("username", userid);
 		
 		return "home";
+		}
+		else{
+			
+			return "index";
+		}
+		
 	}
 
 	
