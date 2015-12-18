@@ -1044,7 +1044,7 @@
 					
 				</div>
 			</div>
-			<form action="login" method="post">
+			<form action="loginNew" method="post">
   User ID:<br>
   <input type="text" name="username">
   <br>

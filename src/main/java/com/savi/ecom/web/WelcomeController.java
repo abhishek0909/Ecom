@@ -23,23 +23,19 @@ public class WelcomeController {
 		this.helloWorldService = helloWorldService;
 	}
 
-	@RequestMapping(value = "/login", method = RequestMethod.POST)
+	@RequestMapping(value = "/loginNew", method = RequestMethod.POST)
 	public String index(@RequestParam("username") String userid,
 			@RequestParam("password") String passwd, Map<String, Object> model) {
 
 		logger.debug("login() is executed!");
 
-		boolean success = helloWorldService.validate(userid,passwd);
+		String success = helloWorldService.validate(userid,passwd);
 		
-		if(success){
-		model.put("username", userid);
+		
+		model.put("username", success);
 		
 		return "home";
-		}
-		else{
-			
-			return "index";
-		}
+		
 		
 	}
 

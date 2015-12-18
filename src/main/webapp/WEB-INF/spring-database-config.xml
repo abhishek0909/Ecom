@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:jee="http://www.springframework.org/schema/jee"
+    xsi:schemaLocation="
+        http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/jee
+        http://www.springframework.org/schema/jee/spring-jee.xsd">
+
+    <jee:jndi-lookup id="dbDataSource" jndi-name="java:comp/env/jdbc/EcomDB" expected-type="javax.sql.DataSource"/>
+
+
+   <bean id="dataSource"
+		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+
+		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
+		<property name="url" value="jdbc:mysql://localhost:3306/ecom" />
+		<property name="username" value="abhi" />
+		<property name="password" value="abhi" />
+	</bean>
+
+   <bean id="userDao" class="com.savi.ecom.dao.impl.UserDaoImpl">
+        <property name="dataSource" ref="dataSource"/>
+    </bean>
+   
+    <!-- other <bean/> definitions here -->
+
+</beans>
