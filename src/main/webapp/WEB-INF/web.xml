@@ -33,7 +33,7 @@
 	</context-param>
 	
 	
-	  <resource-ref>
+	<resource-ref>
       <description>DB Connection</description>
       <res-ref-name>jdbc/EcomDB</res-ref-name>
       <res-type>javax.sql.DataSource</res-type>

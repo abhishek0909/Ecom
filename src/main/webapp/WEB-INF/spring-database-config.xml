@@ -21,7 +21,7 @@
 	</bean>
 
    <bean id="userDao" class="com.savi.ecom.dao.impl.UserDaoImpl">
-        <property name="dataSource" ref="dataSource"/>
+        <property name="dataSource" ref="dbDataSource"/>
     </bean>
    
     <!-- other <bean/> definitions here -->

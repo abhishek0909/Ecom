@@ -44,7 +44,7 @@ public class UserDaoImpl implements UserDao{
 		// TODO Auto-generated method stub
 		List<UserModel> users =  jdbcTemplate.query("select * from user", new UserMapper());
 		
-		return users.get(0);
+		return users.get(1);
 	}
 	
 	private static final class UserMapper implements RowMapper<UserModel> {
