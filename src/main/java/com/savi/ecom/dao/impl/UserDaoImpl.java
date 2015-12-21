@@ -13,6 +13,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.PreparedStatementCreator;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
+import org.springframework.util.CollectionUtils;
 
 import com.savi.ecom.dao.UserDao;
 import com.savi.ecom.model.UserModel;
@@ -75,8 +76,10 @@ public class UserDaoImpl implements UserDao{
 	public UserModel getCurrentUser(String userid) {
 		// TODO Auto-generated method stub
 	List<UserModel> users =  jdbcTemplate.query(new UserIdPS(userid) , new UserMapper());
-		
-		return users.get(0);
+		if(!CollectionUtils.isEmpty(users)){
+			return users.get(0);
+		}
+		return null;
 	}
 	
 	private static final class UserIdPS implements PreparedStatementCreator {

@@ -27,9 +27,11 @@ public class UserDaoTest {
 		
 		UserModel user = userDao.getCurrentUser("abhishek");
 		
-		String userid = user.getUserid() + "::" + user.getEmail();
-		
-		System.out.println(userid);
+		if(user != null){
+			String userid = user.getUserid() + "::" + user.getEmail();
+			
+			System.out.println(userid);
+		}
 		
 	}
 	
@@ -37,7 +39,7 @@ public class UserDaoTest {
 	public void testCreateUser(){
 		
 		UserModel user = new UserModel();
-		user.setUserid("abhishek0909");
+		user.setUserid("abhishek");
 		
 		user.setEmail("abc@xyz.com");
 		
