@@ -1,32 +1,64 @@
 package com.savi.ecom.dao.impl;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
 import javax.sql.DataSource;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.PreparedStatementCreator;
 import org.springframework.jdbc.core.RowMapper;
+import org.springframework.stereotype.Repository;
 
 import com.savi.ecom.dao.UserDao;
 import com.savi.ecom.model.UserModel;
 
+@Repository
 public class UserDaoImpl implements UserDao{
 	
 	private JdbcTemplate jdbcTemplate;
 
+	@Autowired
     public void setDataSource(DataSource dataSource) {
         this.jdbcTemplate = new JdbcTemplate(dataSource);
     }
 
-	public void create(UserModel model) {
+	public void create(final UserModel model) {
 		// TODO Auto-generated method stub
 		
+		jdbcTemplate.update(new PreparedStatementCreator() {
+			
+			public PreparedStatement createPreparedStatement(Connection con) throws SQLException {
+				PreparedStatement stmt = con
+                        .prepareStatement("INSERT into user(USERID, EMAIL) VALUES (?, ?)");
+                stmt.setString(1, model.getUserid());
+                stmt.setString(2, model.getEmail());
+              
+                return stmt;
+				
+			}
+		});
 	}
 
-	public void update(UserModel model) {
-		// TODO Auto-generated method stub
+	public void update(final UserModel model) {
+		
+   jdbcTemplate.update(new PreparedStatementCreator() {
+			
+			public PreparedStatement createPreparedStatement(Connection con) throws SQLException {
+				PreparedStatement stmt = con
+                        .prepareStatement("UPDATE user SET EMAIL= ? WHERE USERID=?");
+                stmt.setString(2, model.getUserid());
+                stmt.setString(1, model.getEmail());
+              
+                return stmt;
+				
+			}
+		});
+		
 		
 	}
 
@@ -42,9 +74,27 @@ public class UserDaoImpl implements UserDao{
 
 	public UserModel getCurrentUser(String userid) {
 		// TODO Auto-generated method stub
-		List<UserModel> users =  jdbcTemplate.query("select * from user", new UserMapper());
+	List<UserModel> users =  jdbcTemplate.query(new UserIdPS(userid) , new UserMapper());
 		
-		return users.get(1);
+		return users.get(0);
+	}
+	
+	private static final class UserIdPS implements PreparedStatementCreator {
+		
+		private String id;
+		
+		public UserIdPS(String userid) {
+			id = userid;
+		}
+
+		public PreparedStatement createPreparedStatement(Connection con) throws SQLException {
+			PreparedStatement stmt = con
+                    .prepareStatement("select USERID, EMAIL from user where USERID=?");
+          
+			stmt.setString(1, id);
+          
+            return stmt;
+		}
 	}
 	
 	private static final class UserMapper implements RowMapper<UserModel> {
