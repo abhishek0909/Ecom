@@ -1,11 +1,19 @@
 package com.savi.ecom.model;
 
+import javax.persistence.Entity;
+import javax.persistence.Table;
+
 // TODO: Auto-generated Javadoc
 /**
  * The Class AddressModel.
  */
+
+@Entity
+@Table(name="ecom_address")
 public class AddressModel extends Model {
 
+	public String user;
+	
 	/** The house number. */
 	public String houseNumber;
 	

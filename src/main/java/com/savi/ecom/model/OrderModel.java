@@ -2,11 +2,24 @@ package com.savi.ecom.model;
 
 import java.util.Set;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
+
 
 /**
  * The Class OrderModel.
  */
+
+@Entity
+@Table(name="ecom_order")
 public class OrderModel extends Model {
+	
+	public String user;
 	
 	/** The order id. */
 	public String orderId;
@@ -15,6 +28,11 @@ public class OrderModel extends Model {
 	public double totalPrice;
 	
 	/** The entries. */
+	@OneToMany(mappedBy="orderId",
+            targetEntity=OrderEntryModel.class,
+            cascade= CascadeType.ALL)
+	@LazyCollection(LazyCollectionOption.FALSE)
+	
 	public Set<OrderEntryModel> entries;
 	
 	/** The active. */

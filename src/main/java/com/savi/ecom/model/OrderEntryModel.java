@@ -1,10 +1,16 @@
 package com.savi.ecom.model;
 
+import javax.persistence.Entity;
+import javax.persistence.Table;
+
 /**
  * The Class OrderEntryModel.
  */
-public class OrderEntryModel {
+@Entity
+@Table(name="order_entry")
+public class OrderEntryModel extends Model{
 	
+	public String orderId;
 	/** The product. */
 	public ProductModel product;
 	

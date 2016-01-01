@@ -39,7 +39,9 @@ public class UserServiceImplTest {
 	public void createUser(){
 		UserModel user = new UserModel();
 		
-		user.setEmail("gaurav@abc.com");
+		String uuid = UUID.randomUUID().toString();
+		String email = "gaurav" + uuid + "@abc.com";
+		user.setEmail(email);
 		user.setFirstName("gaurav");
 		user.setLastName("garg");
 		user.setPassword("test123");

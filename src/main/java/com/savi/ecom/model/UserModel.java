@@ -3,8 +3,13 @@ package com.savi.ecom.model;
 import java.security.MessageDigest;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 
 import com.savi.ecom.util.HashUtil;
 
@@ -43,12 +48,20 @@ public class UserModel extends Model {
 	private String sex;
 	
 	/** The addresses. */
+	@OneToMany(mappedBy="user",
+            targetEntity=AddressModel.class,
+            cascade= CascadeType.ALL)
+	@LazyCollection(LazyCollectionOption.FALSE)
 	private Set<AddressModel> addresses;
 	
 	/** The cart. */
 	private CartModel cart;
 	
 	/** The orders. */
+	@OneToMany(mappedBy="user",
+            targetEntity=OrderModel.class,
+            cascade= CascadeType.ALL)
+	@LazyCollection(LazyCollectionOption.FALSE)
 	private Set<OrderModel> orders;
 	
 	/**

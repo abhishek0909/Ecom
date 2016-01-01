@@ -5,7 +5,9 @@
 <persistence-unit name="samplePersistenceUnit" transaction-type="RESOURCE_LOCAL">
        <provider>org.hibernate.ejb.HibernatePersistence</provider>
         <class>com.savi.ecom.model.UserModel</class>
-       
+        <class>com.savi.ecom.model.AddressModel</class>
+         <class>com.savi.ecom.model.OrderModel</class>
+         <class>com.savi.ecom.model.OrderEntryModel</class>
        <properties>
            <!-- value="create" to build a new database on each run; value="update" to modify an existing database; value="create-drop" means the same as "create" but also drops tables when Hibernate closes; value="validate" makes no changes to the database -->
            <property name="hibernate.ejb.naming_strategy" value="org.hibernate.cfg.ImprovedNamingStrategy"/>
