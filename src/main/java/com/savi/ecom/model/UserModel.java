@@ -42,7 +42,14 @@ public class UserModel extends Model {
 	/** The sex. */
 	private String sex;
 	
-
+	/** The addresses. */
+	private Set<AddressModel> addresses;
+	
+	/** The cart. */
+	private CartModel cart;
+	
+	/** The orders. */
+	private Set<OrderModel> orders;
 	
 	/**
 	 * Gets the userid.
@@ -170,7 +177,59 @@ public class UserModel extends Model {
 		this.sex = sex;
 	}
 
+	/**
+	 * Gets the addresses.
+	 *
+	 * @return the addresses
+	 */
+	public Set<AddressModel> getAddresses() {
+		return addresses;
+	}
 
+	/**
+	 * Sets the addresses.
+	 *
+	 * @param addresses the new addresses
+	 */
+	public void setAddresses(Set<AddressModel> addresses) {
+		this.addresses = addresses;
+	}
+
+	/**
+	 * Gets the cart.
+	 *
+	 * @return the cart
+	 */
+	public CartModel getCart() {
+		return cart;
+	}
+
+	/**
+	 * Sets the cart.
+	 *
+	 * @param cart the new cart
+	 */
+	public void setCart(CartModel cart) {
+		this.cart = cart;
+	}
+
+	/**
+	 * Gets the orders.
+	 *
+	 * @return the orders
+	 */
+	public Set<OrderModel> getOrders() {
+		return orders;
+	}
+
+	/**
+	 * Sets the orders.
+	 *
+	 * @param orders the new orders
+	 */
+	public void setOrders(Set<OrderModel> orders) {
+		this.orders = orders;
+	}
 	
 	
     public String hashPassword(String passwordToHash) throws Exception {
