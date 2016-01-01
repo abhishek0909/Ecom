@@ -13,7 +13,7 @@ import com.savi.ecom.dao.impl.UserDaoImpl;
 import com.savi.ecom.model.UserModel;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration("classpath:spring-dbtest-config.xml")
+@ContextConfiguration(locations=  "classpath:spring-dbtest-config.xml")
 public class UserDaoTest {
 
 	@Autowired
@@ -25,10 +25,10 @@ public class UserDaoTest {
 	@Test
 	public void testGetUser(){
 		
-		UserModel user = userDao.getCurrentUser("abhishek");
+		UserModel user = userDao.getCurrentUser("abc@xyz.com");
 		
 		if(user != null){
-			String userid = user.getUserid() + "::" + user.getEmail();
+			String userid =  user.getEmail();
 			
 			System.out.println(userid);
 		}
@@ -39,9 +39,10 @@ public class UserDaoTest {
 	public void testCreateUser(){
 		
 		UserModel user = new UserModel();
-		user.setUserid("abhishek");
+		
 		
 		user.setEmail("abc@xyz.com");
+		
 		
 		Date date = new Date();
 		user.setCreatedDate(date);
@@ -66,6 +67,19 @@ public class UserDaoTest {
 		userDao.update(user);
 	
 	}
+	
+	@Test
+	public void testFindUserByEmail(){
+		
+		UserModel user = userDao.findByEmailAddress("abc@xyz.com");
+		
+		if(user !=null){
+			
+			System.out.println(user.getUserid());
+		}
+		
+	}
+	
 	
 	
 }

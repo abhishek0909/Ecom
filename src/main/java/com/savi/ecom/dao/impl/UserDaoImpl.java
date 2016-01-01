@@ -35,10 +35,10 @@ public class UserDaoImpl implements UserDao{
 			
 			public PreparedStatement createPreparedStatement(Connection con) throws SQLException {
 				PreparedStatement stmt = con
-                        .prepareStatement("INSERT into user(USERID, EMAIL) VALUES (?, ?)");
-                stmt.setString(1, model.getUserid());
-                stmt.setString(2, model.getEmail());
+                        .prepareStatement("INSERT into user(EMAIL,PASSWORD) VALUES (?, ?)");
               
+                stmt.setString(1, model.getEmail());
+                stmt.setString(2, model.getPassword());
                 return stmt;
 				
 			}
@@ -73,41 +73,55 @@ public class UserDaoImpl implements UserDao{
 		
 	}
 
-	public UserModel getCurrentUser(String userid) {
+	public UserModel getCurrentUser(final String userid) {
 		// TODO Auto-generated method stub
-	List<UserModel> users =  jdbcTemplate.query(new UserIdPS(userid) , new UserMapper());
+	List<UserModel> users =  jdbcTemplate.query(new PreparedStatementCreator() {
+
+		public PreparedStatement createPreparedStatement(Connection con) throws SQLException {
+			PreparedStatement stmt = con
+                    .prepareStatement("select * from user where EMAIL=?");
+          
+			stmt.setString(1, userid);
+          
+            return stmt;
+			}
+		
+       	}, new UserMapper());
 		if(!CollectionUtils.isEmpty(users)){
 			return users.get(0);
 		}
 		return null;
 	}
 	
-	private static final class UserIdPS implements PreparedStatementCreator {
-		
-		private String id;
-		
-		public UserIdPS(String userid) {
-			id = userid;
+	
+	
+	public UserModel findByEmailAddress(final String email) {
+		// TODO Auto-generated method stub
+		List<UserModel> users =  jdbcTemplate.query(new PreparedStatementCreator() {
+			
+			public PreparedStatement createPreparedStatement(Connection con) throws SQLException {
+				PreparedStatement stmt = con
+	                    .prepareStatement("select * from user where Email=?");
+				stmt.setString(1, email);
+				return stmt;
+			}
+		} , new UserMapper());
+		if(!CollectionUtils.isEmpty(users)){
+			return users.get(0);
 		}
-
-		public PreparedStatement createPreparedStatement(Connection con) throws SQLException {
-			PreparedStatement stmt = con
-                    .prepareStatement("select USERID, EMAIL from user where USERID=?");
-          
-			stmt.setString(1, id);
-          
-            return stmt;
-		}
+		return null;
 	}
 	
 	private static final class UserMapper implements RowMapper<UserModel> {
 
 	    public UserModel mapRow(ResultSet rs, int rowNum) throws SQLException {
 	    	UserModel actor = new UserModel();
-	        actor.setUserid(rs.getString("userid"));
+	        
+	    	actor.setPassword(rs.getString("password"));
 	        actor.setEmail(rs.getString("email"));
 	        return actor;
 	    }
 	}
+
 
 }

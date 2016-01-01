@@ -36,7 +36,7 @@ public class LoginService {
 	public String validate(String userid, String passwd) {
 		// TODO Auto-generated method stub
 		
-		UserModel user = userDao.getCurrentUser("");
+		UserModel user = userDao.getCurrentUser(userid);
 		
 		userid = user.getUserid() + "::" + user.getEmail();
 		

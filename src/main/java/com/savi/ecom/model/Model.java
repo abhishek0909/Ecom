@@ -1,14 +1,30 @@
 package com.savi.ecom.model;
 
 import java.util.Date;
+import java.util.UUID;
+
+import javax.persistence.Column;
+import javax.persistence.MappedSuperclass;
+import javax.persistence.Version;
+
+import org.springframework.data.jpa.domain.AbstractPersistable;
+import org.springframework.util.Assert;
 
 /**
  * The Class Model.
  */
-public abstract class Model {
-	
-	/** The pk. */
-	private Long pk;
+@MappedSuperclass
+public abstract class Model extends AbstractPersistable<Long>{
+
+	@Version
+    private int version;
+
+    /**
+     *  All objects will have a unique UUID which allows for the decoupling from DB generated ids
+     *
+     */
+    @Column(length=36)
+    private String uuid;	
 	
 	/** The created date. */
 	private Date createdDate;
@@ -16,24 +32,37 @@ public abstract class Model {
 	/** The modified date. */
 	private Date modifiedDate;
 
-	/**
-	 * Gets the pk.
-	 *
-	 * @return the pk
-	 */
-	public Long getPk() {
-		return pk;
-	}
+	public Model() {
+        this(UUID.randomUUID());
+    }
 
-	/**
-	 * Sets the pk.
-	 *
-	 * @param pk the new pk
-	 */
-	public void setPk(Long pk) {
-		this.pk = pk;
-	}
+    public Model(UUID guid) {
+        Assert.notNull(guid, "UUID is required");
+        setUuid(guid.toString());
+        this.createdDate = new Date();
+    }
 
+    public UUID getUuid() {
+        return UUID.fromString(uuid);
+    }
+
+    public void setUuid(String uuid) {
+        this.uuid = uuid;
+    }
+
+    public int hashCode() {
+        return getUuid().hashCode();
+    }
+	
+    public Object getIdentifier() {
+        return getUuid().toString();
+    }
+
+	
+	public int getVersion() {
+        return version;
+    }
+	
 	/**
 	 * Gets the created date.
 	 *

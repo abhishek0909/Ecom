@@ -1,12 +1,26 @@
 package com.savi.ecom.model;
 
+import java.security.MessageDigest;
 import java.util.Set;
+
+import javax.persistence.Entity;
+import javax.persistence.Table;
+
+import com.savi.ecom.util.HashUtil;
 
 /**
  * The Class UserModel.
  */
+
+@Entity
+@Table(name="rest_user")
 public class UserModel extends Model {
 
+    protected static final String HASH_SALT = "d8a8e885-ecce-42bb-8332-894f20f0d8ed";
+
+    protected static final int HASH_ITERATIONS = 1000;
+	
+	
 	/** The userid. */
 	private String userid;
 	
@@ -28,14 +42,7 @@ public class UserModel extends Model {
 	/** The sex. */
 	private String sex;
 	
-	/** The addresses. */
-	private Set<AddressModel> addresses;
-	
-	/** The cart. */
-	private CartModel cart;
-	
-	/** The orders. */
-	private Set<OrderModel> orders;
+
 	
 	/**
 	 * Gets the userid.
@@ -163,60 +170,29 @@ public class UserModel extends Model {
 		this.sex = sex;
 	}
 
-	/**
-	 * Gets the addresses.
-	 *
-	 * @return the addresses
-	 */
-	public Set<AddressModel> getAddresses() {
-		return addresses;
-	}
 
-	/**
-	 * Sets the addresses.
-	 *
-	 * @param addresses the new addresses
-	 */
-	public void setAddresses(Set<AddressModel> addresses) {
-		this.addresses = addresses;
-	}
-
-	/**
-	 * Gets the cart.
-	 *
-	 * @return the cart
-	 */
-	public CartModel getCart() {
-		return cart;
-	}
-
-	/**
-	 * Sets the cart.
-	 *
-	 * @param cart the new cart
-	 */
-	public void setCart(CartModel cart) {
-		this.cart = cart;
-	}
-
-	/**
-	 * Gets the orders.
-	 *
-	 * @return the orders
-	 */
-	public Set<OrderModel> getOrders() {
-		return orders;
-	}
-
-	/**
-	 * Sets the orders.
-	 *
-	 * @param orders the new orders
-	 */
-	public void setOrders(Set<OrderModel> orders) {
-		this.orders = orders;
-	}
 	
+	
+    public String hashPassword(String passwordToHash) throws Exception {
+        return hashToken(passwordToHash, getEmail() + HASH_SALT );
+    }
+
+
+    private String hashToken(String token, String salt) throws Exception {
+        return HashUtil.byteToBase64(getHash(HASH_ITERATIONS, token, salt.getBytes()));
+    }
+
+    public byte[] getHash(int numberOfIterations, String password, byte[] salt) throws Exception {
+       MessageDigest digest = MessageDigest.getInstance("SHA-256");
+       digest.reset();
+       digest.update(salt);
+       byte[] input = digest.digest(password.getBytes("UTF-8"));
+       for (int i = 0; i < numberOfIterations; i++) {
+           digest.reset();
+           input = digest.digest(input);
+       }
+       return input;
+   }
 	
 	
 }

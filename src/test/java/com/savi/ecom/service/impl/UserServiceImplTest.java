@@ -1,0 +1,55 @@
+package com.savi.ecom.service.impl;
+
+import java.util.UUID;
+
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+
+import com.savi.ecom.model.UserModel;
+import com.savi.ecom.user.api.LoginRequest;
+
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration("classpath:spring-dbtest-config.xml")
+public class UserServiceImplTest {
+
+	@Autowired
+	ApplicationContext applicationContext;
+
+	@Autowired
+	private UserServiceImpl userService;
+	
+	@Test
+	public void testLogin(){
+	
+		String uuid = UUID.randomUUID().toString();
+		String email = "abhishek" + uuid + "@abc.com";
+		String password = "test123";
+		userService.createUser(email,password);    
+		boolean status = userService.login(new LoginRequest(email,password));
+		
+		System.out.println(status);
+	
+	}
+	
+	@Test
+	public void createUser(){
+		UserModel user = new UserModel();
+		
+		user.setEmail("gaurav@abc.com");
+		user.setFirstName("gaurav");
+		user.setLastName("garg");
+		user.setPassword("test123");
+	
+		UserModel newUser = userService.createUser(user);
+		System.out.println(newUser.getFirstName() + "::" + newUser.getLastName());
+		
+		
+	}
+	
+	
+	
+}
