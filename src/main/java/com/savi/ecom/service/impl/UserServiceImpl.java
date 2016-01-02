@@ -3,18 +3,17 @@ package com.savi.ecom.service.impl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.savi.ecom.dao.UserDao;
-import com.savi.ecom.dao.impl.UserRepository;
+import com.savi.ecom.domain.repo.UserRepository;
 import com.savi.ecom.exception.AuthenticationException;
 import com.savi.ecom.exception.DuplicateUserException;
 import com.savi.ecom.model.UserModel;
+import com.savi.ecom.service.UserService;
 import com.savi.ecom.user.api.LoginRequest;
 
 @Service
-public class UserServiceImpl {
+public class UserServiceImpl implements UserService {
 	
-	
-	UserDao userDao;
+
 	UserRepository userRepository;
 	
 	
@@ -23,18 +22,6 @@ public class UserServiceImpl {
 		this.userRepository = userRepository;
 	}
 
-
-
-
-	@Autowired
-    public void setUserDao(UserDao userdao){
-    	
-    	this.userDao = userdao;
-    	
-    }
-		
-	
-	
 	
 	public boolean login(LoginRequest request){
 		
@@ -60,31 +47,6 @@ public class UserServiceImpl {
 	}
 	
 	
-	
-	public void createUser( String email, String password){
-				
-		UserModel searchedForUser =  userDao.findByEmailAddress(email);
-		if (searchedForUser != null) {
-            throw new DuplicateUserException();
-        }
-		//  Else Create New User
-		UserModel user = new UserModel();
-		user.setEmail(email);
-		try {
-			user.setPassword(user.hashPassword(password));
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-		userDao.create(user);
-		
-		
-		
-	}
-
-	
-
 	public UserModel createUser(UserModel user) {
 		UserModel searchedForUser =  userRepository.findByEmail(user.getEmail());
 		if (searchedForUser != null) {
@@ -102,6 +64,15 @@ public class UserServiceImpl {
 		
 		return newUser;
 	}
+
+
+	public boolean validateEmail(String email) {
+		// TODO Auto-generated method stub
+		return false;
+	}
 	
 
 }
+
+
+

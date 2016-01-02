@@ -20,7 +20,7 @@
 
    <context:component-scan base-package="com.savi.ecom.*" />
  	
-   <jpa:repositories base-package="com.savi.ecom.dao" />
+   <jpa:repositories base-package="com.savi.ecom.domain.repo" />
    <tx:annotation-driven/>
    
    <bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">

@@ -1,4 +1,4 @@
-package com.savi.ecom.dao.impl;
+package com.savi.ecom.domain.repo;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 

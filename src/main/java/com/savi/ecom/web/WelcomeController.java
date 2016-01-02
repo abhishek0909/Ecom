@@ -10,16 +10,17 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.savi.ecom.service.LoginService;
+import com.savi.ecom.service.UserService;
+import com.savi.ecom.user.api.LoginRequest;
 
 @Controller
 public class WelcomeController {
 
 	private final Logger logger = LoggerFactory.getLogger(WelcomeController.class);
-	private final LoginService helloWorldService;
+	private final UserService helloWorldService;
 
 	@Autowired
-	public WelcomeController(LoginService helloWorldService) {
+	public WelcomeController(UserService helloWorldService) {
 		this.helloWorldService = helloWorldService;
 	}
 
@@ -29,7 +30,7 @@ public class WelcomeController {
 
 		logger.debug("login() is executed!");
 
-		String success = helloWorldService.validate(userid,passwd);
+		boolean success = helloWorldService.login(new LoginRequest(userid,passwd));
 		
 		
 		model.put("username", success);

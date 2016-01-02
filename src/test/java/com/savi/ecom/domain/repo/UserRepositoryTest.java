@@ -1,4 +1,4 @@
-package com.savi.ecom;
+package com.savi.ecom.domain.repo;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -7,7 +7,7 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import com.savi.ecom.dao.impl.UserRepository;
+import com.savi.ecom.domain.repo.UserRepository;
 import com.savi.ecom.model.UserModel;
 
 @RunWith(SpringJUnit4ClassRunner.class)
