@@ -24,7 +24,7 @@ public class UserRepositoryTest {
 	@Test
 	public void testGetUser(){
 		
-		UserModel user = userRepository.findByEmail("abhishek123@abc.com");
+		UserModel user = userRepository.findByEmail("abhishek5c9ebb91-ed4d-47e2-ae27-61c3762e3bc5@abc.com");
 		
 		if(user != null){
 			String userid =  user.getEmail();
