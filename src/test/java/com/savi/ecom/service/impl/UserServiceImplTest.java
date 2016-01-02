@@ -25,10 +25,16 @@ public class UserServiceImplTest {
 	@Test
 	public void testLogin(){
 	
+		UserModel user = new UserModel();
 		String uuid = UUID.randomUUID().toString();
 		String email = "abhishek" + uuid + "@abc.com";
 		String password = "test123";
-		userService.createUser(email,password);    
+		user.setEmail(email);
+		user.setFirstName("abhishek");
+		user.setLastName("Mittal");
+		user.setPassword(password);
+		
+		userService.createUser(user);    
 		boolean status = userService.login(new LoginRequest(email,password));
 		
 		System.out.println(status);
