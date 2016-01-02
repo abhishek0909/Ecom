@@ -4,6 +4,8 @@ import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -19,6 +21,8 @@ import org.hibernate.annotations.LazyCollectionOption;
 @Table(name="ecom_order")
 public class OrderModel extends Model {
 	
+	 @ManyToOne(targetEntity=UserModel.class)
+	 @JoinColumn(name = "user_id")
 	public String user;
 	
 	/** The order id. */

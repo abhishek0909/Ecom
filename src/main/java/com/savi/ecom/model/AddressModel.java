@@ -1,6 +1,8 @@
 package com.savi.ecom.model;
 
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 // TODO: Auto-generated Javadoc
@@ -12,6 +14,8 @@ import javax.persistence.Table;
 @Table(name="ecom_address")
 public class AddressModel extends Model {
 
+    @ManyToOne(targetEntity = UserModel.class)
+    @JoinColumn(name = "user_id")
 	public String user;
 	
 	/** The house number. */

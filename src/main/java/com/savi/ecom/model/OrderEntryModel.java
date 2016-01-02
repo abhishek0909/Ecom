@@ -1,6 +1,8 @@
 package com.savi.ecom.model;
 
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 /**
@@ -10,6 +12,8 @@ import javax.persistence.Table;
 @Table(name="order_entry")
 public class OrderEntryModel extends Model{
 	
+	 @ManyToOne(targetEntity=OrderModel.class)
+	 @JoinColumn(name = "order_id")
 	public String orderId;
 	/** The product. */
 	public ProductModel product;
