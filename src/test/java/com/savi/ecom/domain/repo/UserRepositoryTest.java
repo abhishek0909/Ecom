@@ -1,5 +1,9 @@
 package com.savi.ecom.domain.repo;
 
+import java.util.HashSet;
+import java.util.Set;
+import java.util.UUID;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,6 +12,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.savi.ecom.domain.repo.UserRepository;
+import com.savi.ecom.model.AddressModel;
 import com.savi.ecom.model.UserModel;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -38,10 +43,20 @@ public class UserRepositoryTest {
 	public void createUser(){
 		
 		UserModel user = new UserModel();
-		
-		user.setEmail("gaurav@abc.com");
+		user.setEmail("gaurav123@abc"+UUID.randomUUID().toString()+".com");
 		user.setFirstName("gaurav");
 		user.setLastName("garg");
+		
+		Set<AddressModel> addresses = new HashSet();
+		AddressModel address = new AddressModel();
+		address.setHouseNumber("12345");
+		//address.setUser(user);
+		addresses.add(address);
+		AddressModel address2 = new AddressModel();
+		address2.setHouseNumber("12345-1");
+		//address2.setUser(user);
+		addresses.add(address2);
+		user.setAddresses(addresses);
 		try {
 			user.setPassword(user.hashPassword("test123"));
 		} catch (Exception e) {

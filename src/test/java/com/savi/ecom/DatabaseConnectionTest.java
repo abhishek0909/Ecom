@@ -22,7 +22,7 @@ public void databaseConnectionTest(){
 	      // Setup the connection with the DB
 	      connect = DriverManager
 	          .getConnection("jdbc:mysql://localhost/ecom?"
-	              + "user=abhi&password=abhi");
+	              + "user=root&password=admin");
 
 	      // Statements allow to issue SQL queries to the database
 	      statement = connect.createStatement();

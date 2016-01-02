@@ -1044,6 +1044,16 @@
 					
 				</div>
 			</div>
+			<form action="createUser" name="userCreateForm" method="post">
+				First Name:
+				<input type="text" name="userDTO.firstName">
+				Last Name:
+				<input type="text" name="userDTO.lastName">
+				Email:
+				<input type="text" name="userDTO.email">		
+				<input type="submit" value="CreateUser">		
+			</form>
+			
 			<form action="loginNew" method="post">
   User ID:<br>
   <input type="text" name="username">

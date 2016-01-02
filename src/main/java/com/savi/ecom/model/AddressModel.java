@@ -5,7 +5,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class AddressModel.
  */
@@ -16,7 +15,7 @@ public class AddressModel extends Model {
 
     @ManyToOne(targetEntity = UserModel.class)
     @JoinColumn(name = "user_id")
-	public String user;
+	public UserModel user;
 	
 	/** The house number. */
 	public String houseNumber;
@@ -163,6 +162,14 @@ public class AddressModel extends Model {
 	 */
 	public void setDefaultShipping(boolean defaultShiping) {
 		this.defaultShipping = defaultShiping;
+	}
+
+	public UserModel getUser() {
+		return user;
+	}
+
+	public void setUser(UserModel user) {
+		this.user = user;
 	}
 	
 	
