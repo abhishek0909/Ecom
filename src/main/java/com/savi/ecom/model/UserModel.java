@@ -1,6 +1,9 @@
 package com.savi.ecom.model;
 
 import java.security.MessageDigest;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -10,6 +13,7 @@ import javax.persistence.Table;
 
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
+
 
 import com.savi.ecom.util.HashUtil;
 
@@ -47,6 +51,8 @@ public class UserModel extends Model {
 	/** The sex. */
 	private String sex;
 	
+	private boolean isVerified;
+	
 	/** The addresses. */
 	@OneToMany(mappedBy="user",
             targetEntity=AddressModel.class,
@@ -63,6 +69,13 @@ public class UserModel extends Model {
             cascade= CascadeType.ALL)
 	@LazyCollection(LazyCollectionOption.FALSE)
 	private Set<OrderModel> orders;
+	
+    @OneToMany(mappedBy="user",
+            targetEntity=VerificationToken.class,
+            cascade= CascadeType.ALL)
+    @LazyCollection(LazyCollectionOption.FALSE)
+    private List<VerificationToken> verificationTokens = new ArrayList<VerificationToken>();
+    
 	
 	/**
 	 * Gets the userid.
@@ -243,6 +256,22 @@ public class UserModel extends Model {
 	public void setOrders(Set<OrderModel> orders) {
 		this.orders = orders;
 	}
+	
+	 public boolean isVerified() {
+	        return isVerified;
+	 }
+
+	 public void setVerified(boolean verified) {
+	        isVerified = verified;
+	 }
+	
+	 public synchronized void addVerificationToken(VerificationToken token) {
+	        verificationTokens.add(token);
+	 }
+
+	 public synchronized List<VerificationToken> getVerificationTokens() {
+	        return Collections.unmodifiableList(this.verificationTokens);
+	 }
 	
 	
     public String hashPassword(String passwordToHash) throws Exception {

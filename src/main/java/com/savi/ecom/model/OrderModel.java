@@ -23,7 +23,7 @@ public class OrderModel extends Model {
 	
 	 @ManyToOne(targetEntity=UserModel.class)
 	 @JoinColumn(name = "user_id")
-	public String user;
+	public UserModel user;
 	
 	/** The order id. */
 	public String orderId;

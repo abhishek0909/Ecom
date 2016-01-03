@@ -14,7 +14,7 @@ public class OrderEntryModel extends Model{
 	
 	 @ManyToOne(targetEntity=OrderModel.class)
 	 @JoinColumn(name = "order_id")
-	public String orderId;
+	public OrderModel orderId;
 	/** The product. */
 	public ProductModel product;
 	

@@ -60,7 +60,9 @@ public class UserServiceImpl implements UserService {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
 		UserModel newUser = userRepository.save(user);
+		
 		
 		return newUser;
 	}
