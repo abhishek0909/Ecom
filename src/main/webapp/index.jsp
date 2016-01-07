@@ -1044,7 +1044,7 @@
 					
 				</div>
 			</div>
-			<form action="createUser" name="userCreateForm" method="post">
+			<form action="user" name="userCreateForm" method="post">
 				First Name:
 				<input type="text" name="userDTO.firstName">
 				Last Name:

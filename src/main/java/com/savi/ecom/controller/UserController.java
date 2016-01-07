@@ -36,7 +36,7 @@ public class UserController {
 	 * @param model the model
 	 * @return the copy rule
 	 */
-	@RequestMapping(value = "/createUser", method = RequestMethod.POST)
+	@RequestMapping(value = "/user", method = RequestMethod.POST)
 	public String getCopyRule(
 			@ModelAttribute("userCreateForm") final UserCreateForm userCreateForm,
 			final HttpServletRequest request, final Model model){
