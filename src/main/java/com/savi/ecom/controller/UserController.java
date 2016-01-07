@@ -10,10 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.view.RedirectView;
 
-import com.savi.ecom.convertor.UserConvertor;
 import com.savi.ecom.form.UserCreateForm;
 import com.savi.ecom.model.UserModel;
 import com.savi.ecom.service.UserService;
@@ -44,8 +41,9 @@ public class UserController {
 			@ModelAttribute("userCreateForm") final UserCreateForm userCreateForm,
 			final HttpServletRequest request, final Model model){
 		System.out.println(userCreateForm.getUserDTO());
-		UserConvertor userConvertor = new UserConvertor();
-		UserModel user = userConvertor.convert(new UserModel(), userCreateForm.getUserDTO());
+		
+		UserModel user =new UserModel();
+		user.convert(userCreateForm.getUserDTO());
 		user.setPassword("1234");
 		userService.createUser(user);
 		return "home";

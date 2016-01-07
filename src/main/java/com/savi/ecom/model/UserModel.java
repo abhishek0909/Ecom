@@ -14,7 +14,8 @@ import javax.persistence.Table;
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
 
-
+import com.savi.ecom.convertor.IConvertor;
+import com.savi.ecom.dto.UserDTO;
 import com.savi.ecom.util.HashUtil;
 
 /**
@@ -23,7 +24,7 @@ import com.savi.ecom.util.HashUtil;
 
 @Entity
 @Table(name="rest_user")
-public class UserModel extends Model {
+public class UserModel extends Model implements IConvertor<UserModel,UserDTO> {
 
     protected static final String HASH_SALT = "d8a8e885-ecce-42bb-8332-894f20f0d8ed";
 
@@ -274,6 +275,31 @@ public class UserModel extends Model {
 	 }
 	
 	
+    public VerificationToken getActiveLostPasswordToken() {
+        return getActiveToken(VerificationToken.VerificationTokenType.lostPassword);
+    }
+
+    public VerificationToken getActiveEmailVerificationToken() {
+        return getActiveToken(VerificationToken.VerificationTokenType.emailVerification);
+    }
+
+    public VerificationToken getActiveEmailRegistrationToken() {
+        return getActiveToken(VerificationToken.VerificationTokenType.emailRegistration);
+    }
+
+    private VerificationToken getActiveToken(VerificationToken.VerificationTokenType tokenType) {
+         VerificationToken activeToken = null;
+        for (VerificationToken token : getVerificationTokens()) {
+            if (token.getTokenType().equals(tokenType)
+                    && !token.hasExpired() && !token.isVerified()) {
+                activeToken = token;
+                break;
+            }
+        }
+        return activeToken;
+    }
+	 
+	 
     public String hashPassword(String passwordToHash) throws Exception {
         return hashToken(passwordToHash, getEmail() + HASH_SALT );
     }
@@ -294,6 +320,15 @@ public class UserModel extends Model {
        }
        return input;
    }
+
+	public UserModel convert(UserDTO userDto) {
+		
+			this.setFirstName(userDto.getFirstName());
+			this.setLastName(userDto.getLastName());
+			this.setEmail(userDto.getEmail());
+			return this;
+		
+	}
 	
 	
 }
