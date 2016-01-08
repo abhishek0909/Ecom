@@ -16,6 +16,7 @@ import com.savi.ecom.model.UserModel;
 import com.savi.ecom.service.UserService;
 import com.savi.ecom.web.WelcomeController;
 
+@RequestMapping("/user")
 @Controller
 public class UserController {
 	
@@ -35,11 +36,12 @@ public class UserController {
 	 * @param request the request
 	 * @param model the model
 	 * @return the copy rule
+	 * @throws Exception 
 	 */
-	@RequestMapping(value = "/user", method = RequestMethod.POST)
-	public String getCopyRule(
+	@RequestMapping( method = RequestMethod.POST)
+	public String createNewUser(
 			@ModelAttribute("userCreateForm") final UserCreateForm userCreateForm,
-			final HttpServletRequest request, final Model model){
+			final HttpServletRequest request, final Model model) throws Exception{
 		System.out.println(userCreateForm.getUserDTO());
 		
 		UserModel user =new UserModel();

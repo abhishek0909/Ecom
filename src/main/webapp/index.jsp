@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -1050,20 +1051,22 @@
 				Last Name:
 				<input type="text" name="userDTO.lastName">
 				Email:
-				<input type="text" name="userDTO.email">		
+				<input type="text" name="userDTO.email">	
+				Password:
+				<input type="text" name="password" >	
 				<input type="submit" value="CreateUser">		
 			</form>
 			
 			<form action="loginNew" method="post">
-  User ID:<br>
-  <input type="text" name="username">
-  <br>
-  Password:<br>
-  <input type="text" name="password" >
-  <br><br>
-  <input type="submit" value="Submit">
-</form>
-<a href="forgotPassword">Forgot Password</a> 
+			  User ID:<br>
+			  <input type="text" name="username">
+			  <br>
+			  Password:<br>
+			  <input type="text" name="password" >
+			  <br><br>
+			  <input type="submit" value="Submit">
+			</form>
+		<a href="password/forgotPassword">Forgot Password</a> 
 		</div>
 		
 		<div class="footer-bottom">

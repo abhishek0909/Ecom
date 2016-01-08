@@ -14,7 +14,7 @@ public class UserDTO {
 	/** The email. */
 	private String email;
 	
-	
+	private String password;
 
 	/**
 	 * Gets the first name.
@@ -74,6 +74,14 @@ public class UserDTO {
 	public String toString() {
 		return "UserDTO [firstName=" + firstName + ", lastName=" + lastName
 				+ ", email=" + email + "]";
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
 	}
 	
 	

@@ -16,22 +16,22 @@ public class VerificationTokenServiceImplTest {
 	ApplicationContext applicationContext;
 
 	@Autowired
-	VerificationTokenServiceImpl verificationService;
+	VerificationTokenServiceImpl verificationTokenService;
 	
 	@Test
 	public void testSendRegistrationtoken(){
 		
 		
-		verificationService.sendEmailRegistrationToken("gaurav@abc.com");
+		verificationTokenService.sendEmailRegistrationToken("gaurav@abc.com");
 		
 	}
 	
-	@Test
+	@Test(expected=java.lang.Exception.class)
 	public void verifyToken(){
 		
 		String token = "37a9f39d-7d6f-4969-ae6a-5892014dfab3";
 		
-		verificationService.verify(new String(Base64.encodeBase64(token.getBytes())));
+		verificationTokenService.verify(new String(Base64.encodeBase64(token.getBytes())));
 		
 		
 	}

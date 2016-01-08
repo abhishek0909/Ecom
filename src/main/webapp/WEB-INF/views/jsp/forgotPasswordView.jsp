@@ -9,9 +9,9 @@
 <body>
 
 
-<form action="validateEmail" method="post">
+<form action="token" name="lostPasswordForm" method="post">
   Email:<br>
-  <input type="text" name="email">
+  <input type="text" name="lostPasswordDTO.email">
   <br>
  
   <input type="submit" value="Submit">

@@ -6,10 +6,12 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
+
 import com.savi.ecom.config.ApplicationConfig;
 import com.savi.ecom.domain.repo.UserRepository;
 import com.savi.ecom.domain.repo.VerificationTokenRepository;
 import com.savi.ecom.exception.AlreadyVerifiedException;
+import com.savi.ecom.exception.AuthenticationException;
 import com.savi.ecom.exception.TokenHasExpiredException;
 import com.savi.ecom.exception.TokenNotFoundException;
 import com.savi.ecom.model.UserModel;
@@ -39,10 +41,58 @@ public class VerificationTokenServiceImpl {
                 config.getEmailRegistrationTokenExpiryTimeInMinutes());
         user.addVerificationToken(token);
         userRepository.save(user);
+     // @TODO Persist email message to database for Email sender to send
+        return token;
+    }
+    
+    private VerificationToken sendEmailVerificationToken(String userId) {
+    	 UserModel user = ensureUserIsLoaded(userId);
+        VerificationToken token = new VerificationToken(user, VerificationToken.VerificationTokenType.emailVerification,
+                config.getEmailVerificationTokenExpiryTimeInMinutes());
+        user.addVerificationToken(token);
+        userRepository.save(user);
+        return token;
+    }
+    
+    @Transactional
+    public VerificationToken sendLostPasswordToken(String userId) {
+       
+        VerificationToken token = null;
+        UserModel user = userRepository.findByEmail(userId);
+        if (user != null) {
+            token = user.getActiveLostPasswordToken();
+            if (token == null) {
+                token = new VerificationToken(user, VerificationToken.VerificationTokenType.lostPassword,
+                        config.getLostPasswordTokenExpiryTimeInMinutes());
+                user.addVerificationToken(token);
+                userRepository.save(user);
+            }
+         }
 
         return token;
     }
     
+    @Transactional
+    public VerificationToken resetPassword(String base64EncodedToken, String password) {
+        Assert.notNull(base64EncodedToken);
+        
+        VerificationToken token = loadToken(base64EncodedToken);
+        if (token.isVerified()) {
+            throw new AlreadyVerifiedException();
+        }
+        token.setVerified(true);
+        UserModel user = token.getUser();
+        try {
+            user.setPassword(user.hashPassword(password));
+        } catch (Exception e) {
+            throw new AuthenticationException();
+        }
+        //set user to verified if not already and authenticated role
+        user.setVerified(true);
+       
+        userRepository.save(user);
+        return token;
+    }
     
     @Transactional
     public VerificationToken verify(String base64EncodedToken) {

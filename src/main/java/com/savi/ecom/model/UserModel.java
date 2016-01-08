@@ -321,11 +321,12 @@ public class UserModel extends Model implements IConvertor<UserModel,UserDTO> {
        return input;
    }
 
-	public UserModel convert(UserDTO userDto) {
+	public UserModel convert(UserDTO userDto) throws Exception {
 		
 			this.setFirstName(userDto.getFirstName());
 			this.setLastName(userDto.getLastName());
 			this.setEmail(userDto.getEmail());
+			this.setPassword(hashPassword(userDto.getPassword()));
 			return this;
 		
 	}
