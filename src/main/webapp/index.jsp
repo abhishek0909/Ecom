@@ -1053,7 +1053,7 @@
 				Email:
 				<input type="text" name="userDTO.email">	
 				Password:
-				<input type="text" name="password" >	
+				<input type="text" name="userDTO.password" >	
 				<input type="submit" value="CreateUser">		
 			</form>
 			

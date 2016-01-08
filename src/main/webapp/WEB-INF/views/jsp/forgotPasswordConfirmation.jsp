@@ -10,5 +10,7 @@
  An email would be sent to the address ${forgotPasswordEmail} if registered.
  <br>
  Token sent with id ${token}
+ <br>
+ <a href="../index.jsp">Home</a>
 </body>
 </html>

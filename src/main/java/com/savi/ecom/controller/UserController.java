@@ -46,7 +46,7 @@ public class UserController {
 		
 		UserModel user =new UserModel();
 		user.convert(userCreateForm.getUserDTO());
-		user.setPassword("1234");
+		
 		userService.createUser(user);
 		return "home";
 //		return new ModelAndView(new RedirectView("home", true, false));
