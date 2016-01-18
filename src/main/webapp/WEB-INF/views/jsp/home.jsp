@@ -7,6 +7,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-   <h1>"${username} Logged In!!"</h1>
+   <h1>"User with Id ${useremail} got Created!!"</h1>
 </body>
 </html>

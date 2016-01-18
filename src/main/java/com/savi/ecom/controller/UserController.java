@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import com.savi.ecom.form.UserCreateForm;
 import com.savi.ecom.model.UserModel;
 import com.savi.ecom.service.UserService;
+import com.savi.ecom.service.impl.VerificationTokenServiceImpl;
 import com.savi.ecom.web.WelcomeController;
 
 @RequestMapping("/user")
@@ -23,6 +24,9 @@ public class UserController {
 	private final Logger logger = LoggerFactory.getLogger(WelcomeController.class);
 	
 	private final UserService userService;
+	
+	@Autowired
+	private VerificationTokenServiceImpl verificationTokenService;
 	
 	@Autowired
 	public UserController(UserService userService) {
@@ -47,7 +51,10 @@ public class UserController {
 		UserModel user =new UserModel();
 		user.convert(userCreateForm.getUserDTO());
 		
-		userService.createUser(user);
+		user = userService.createUser(user);
+		model.addAttribute("useremail", user.getEmail());
+		
+		verificationTokenService.sendEmailRegistrationToken(user.getEmail());
 		return "home";
 //		return new ModelAndView(new RedirectView("home", true, false));
 	}
