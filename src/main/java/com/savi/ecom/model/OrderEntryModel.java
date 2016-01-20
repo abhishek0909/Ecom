@@ -15,8 +15,12 @@ public class OrderEntryModel extends Model{
 	 @ManyToOne(targetEntity=OrderModel.class)
 	 @JoinColumn(name = "order_id")
 	public OrderModel orderId;
-	/** The product. */
-	public ProductModel product;
+	 
+	/** The product. */	 
+	 
+	public String productId;
+	
+	public String productName;
 	
 	/** The quantity. */
 	public Long quantity;
@@ -24,22 +28,30 @@ public class OrderEntryModel extends Model{
 	/** The price. */
 	public double price;
 
-	/**
-	 * Gets the product.
-	 *
-	 * @return the product
-	 */
-	public ProductModel getProduct() {
-		return product;
+	
+
+	public OrderModel getOrderId() {
+		return orderId;
 	}
 
-	/**
-	 * Sets the product.
-	 *
-	 * @param product the new product
-	 */
-	public void setProduct(ProductModel product) {
-		this.product = product;
+	public void setOrderId(OrderModel orderId) {
+		this.orderId = orderId;
+	}
+
+	public String getProductId() {
+		return productId;
+	}
+
+	public void setProductId(String productId) {
+		this.productId = productId;
+	}
+
+	public String getProductName() {
+		return productName;
+	}
+
+	public void setProductName(String productName) {
+		this.productName = productName;
 	}
 
 	/**

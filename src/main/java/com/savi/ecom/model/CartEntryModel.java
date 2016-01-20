@@ -6,7 +6,7 @@ package com.savi.ecom.model;
 public class CartEntryModel extends Model {
 	
 	/** The product. */
-	public ProductModel product;
+	public String productId;
 	
 	/** The quantity. */
 	public Long quantity;
@@ -14,22 +14,14 @@ public class CartEntryModel extends Model {
 	/** The price. */
 	public double price;
 
-	/**
-	 * Gets the product.
-	 *
-	 * @return the product
-	 */
-	public ProductModel getProduct() {
-		return product;
+
+
+	public String getProductId() {
+		return productId;
 	}
 
-	/**
-	 * Sets the product.
-	 *
-	 * @param product the new product
-	 */
-	public void setProduct(ProductModel product) {
-		this.product = product;
+	public void setProductId(String productId) {
+		this.productId = productId;
 	}
 
 	/**

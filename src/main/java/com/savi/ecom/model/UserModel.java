@@ -64,12 +64,6 @@ public class UserModel extends Model implements IConvertor<UserModel,UserDTO> {
 	/** The cart. */
 	private CartModel cart;
 	
-	/** The orders. */
-	@OneToMany(mappedBy="user",
-            targetEntity=OrderModel.class,
-            cascade= CascadeType.ALL)
-	@LazyCollection(LazyCollectionOption.FALSE)
-	private Set<OrderModel> orders;
 	
     @OneToMany(mappedBy="user",
             targetEntity=VerificationToken.class,
@@ -240,23 +234,7 @@ public class UserModel extends Model implements IConvertor<UserModel,UserDTO> {
 		this.cart = cart;
 	}
 
-	/**
-	 * Gets the orders.
-	 *
-	 * @return the orders
-	 */
-	public Set<OrderModel> getOrders() {
-		return orders;
-	}
 
-	/**
-	 * Sets the orders.
-	 *
-	 * @param orders the new orders
-	 */
-	public void setOrders(Set<OrderModel> orders) {
-		this.orders = orders;
-	}
 	
 	 public boolean isVerified() {
 	        return isVerified;

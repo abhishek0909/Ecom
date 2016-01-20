@@ -21,9 +21,8 @@ import org.hibernate.annotations.LazyCollectionOption;
 @Table(name="ecom_order")
 public class OrderModel extends Model {
 	
-	 @ManyToOne(targetEntity=UserModel.class)
-	 @JoinColumn(name = "user_id")
-	public UserModel user;
+	 
+	public String userId;
 	
 	/** The order id. */
 	public String orderId;
@@ -42,6 +41,14 @@ public class OrderModel extends Model {
 	/** The active. */
 	public boolean active;
 	
+	public String getUserId() {
+		return userId;
+	}
+
+	public void setUserId(String userId) {
+		this.userId = userId;
+	}
+
 	/**
 	 * Checks if is active.
 	 *

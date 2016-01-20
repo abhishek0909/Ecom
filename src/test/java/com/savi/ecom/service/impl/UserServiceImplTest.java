@@ -27,14 +27,14 @@ public class UserServiceImplTest {
 	
 		UserModel user = new UserModel();
 		String uuid = UUID.randomUUID().toString();
-		String email = "abhishek" + uuid + "@abc.com";
+		String email = "abhishek" + "5c9ebb91-ed4d-47e2-ae27-61c3762e3bc5" + "@abc.com";
 		String password = "test123";
 		user.setEmail(email);
 		user.setFirstName("abhishek");
 		user.setLastName("Mittal");
 		user.setPassword(password);
 		
-		userService.createUser(user);    
+	//	userService.createUser(user);    
 		boolean status = userService.login(new LoginRequest(email,password));
 		
 		System.out.println(status);
