@@ -2,9 +2,14 @@ package com.savi.ecom.model;
 
 import java.util.Date;
 
+import javax.persistence.Entity;
+import javax.persistence.Table;
+
 /**
  * The Class Product.
  */
+@Entity
+@Table(name="product")
 public class ProductModel extends Model {
 	
 	/** The name. */
@@ -20,7 +25,7 @@ public class ProductModel extends Model {
 	private String description;
 	
 	/** The qualtity. */
-	private Integer qualtity;
+	private Integer quality;
 	
 	/** The price. */
 	private Double price;
@@ -31,6 +36,10 @@ public class ProductModel extends Model {
 	/** The active. */
 	private boolean active;
 
+	private String slug;
+	
+	private String sku;
+	
 	/**
 	 * Gets the name.
 	 *
@@ -108,8 +117,8 @@ public class ProductModel extends Model {
 	 *
 	 * @return the qualtity
 	 */
-	public Integer getQualtity() {
-		return qualtity;
+	public Integer getQuality() {
+		return quality;
 	}
 
 	/**
@@ -117,8 +126,8 @@ public class ProductModel extends Model {
 	 *
 	 * @param qualtity the new qualtity
 	 */
-	public void setQualtity(Integer qualtity) {
-		this.qualtity = qualtity;
+	public void setQuality(Integer qualtity) {
+		this.quality = qualtity;
 	}
 
 	/**
@@ -174,5 +183,14 @@ public class ProductModel extends Model {
 	public void setActive(boolean active) {
 		this.active = active;
 	}
+
+	public String getSlug() {
+		return slug;
+	}
+
+	public void setSlug(String slug) {
+		this.slug = slug;
+	}
+
 	
 }

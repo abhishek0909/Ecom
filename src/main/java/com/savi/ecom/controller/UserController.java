@@ -43,15 +43,15 @@ public class UserController {
 	 * @throws Exception 
 	 */
 	@RequestMapping( method = RequestMethod.POST)
-	public String createNewUser(
+	public String createUser(
 			@ModelAttribute("userCreateForm") final UserCreateForm userCreateForm,
 			final HttpServletRequest request, final Model model) throws Exception{
 		System.out.println(userCreateForm.getUserDTO());
 		
 		UserModel user =new UserModel();
-		user.convert(userCreateForm.getUserDTO());
+	
 		
-		user = userService.createUser(user);
+		user = userService.createUser(userCreateForm.getUserDTO());
 		model.addAttribute("useremail", user.getEmail());
 		
 		verificationTokenService.sendEmailRegistrationToken(user.getEmail());

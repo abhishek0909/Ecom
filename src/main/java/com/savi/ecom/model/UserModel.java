@@ -24,7 +24,7 @@ import com.savi.ecom.util.HashUtil;
 
 @Entity
 @Table(name="rest_user")
-public class UserModel extends Model implements IConvertor<UserModel,UserDTO> {
+public class UserModel extends Model  {
 
     protected static final String HASH_SALT = "d8a8e885-ecce-42bb-8332-894f20f0d8ed";
 
@@ -299,15 +299,7 @@ public class UserModel extends Model implements IConvertor<UserModel,UserDTO> {
        return input;
    }
 
-	public UserModel convert(UserDTO userDto) throws Exception {
-		
-			this.setFirstName(userDto.getFirstName());
-			this.setLastName(userDto.getLastName());
-			this.setEmail(userDto.getEmail());
-			this.setPassword(hashPassword(userDto.getPassword()));
-			return this;
-		
-	}
+	
 	
 	
 }

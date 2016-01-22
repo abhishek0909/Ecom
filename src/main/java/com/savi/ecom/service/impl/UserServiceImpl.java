@@ -3,7 +3,9 @@ package com.savi.ecom.service.impl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.savi.ecom.convertor.UserConvertor;
 import com.savi.ecom.domain.repo.UserRepository;
+import com.savi.ecom.dto.UserDTO;
 import com.savi.ecom.exception.AuthenticationException;
 import com.savi.ecom.exception.DuplicateUserException;
 import com.savi.ecom.model.UserModel;
@@ -14,12 +16,13 @@ import com.savi.ecom.user.api.LoginRequest;
 public class UserServiceImpl implements UserService {
 	
 
-	UserRepository userRepository;
-	
+	private UserRepository userRepository;
+	private UserConvertor userConvertor;
 	
 	@Autowired
-	public void setUserRepository(UserRepository userRepository) {
+	public void setUserRepository(UserRepository userRepository,UserConvertor userConvertor) {
 		this.userRepository = userRepository;
+		this.userConvertor = userConvertor;
 	}
 
 	
@@ -47,7 +50,9 @@ public class UserServiceImpl implements UserService {
 	}
 	
 	
-	public UserModel createUser(UserModel user) {
+	public UserModel createUser(UserDTO userDto) {
+		UserModel user = userConvertor.convert(userDto);
+		
 		UserModel searchedForUser =  userRepository.findByEmail(user.getEmail());
 		if (searchedForUser != null) {
             throw new DuplicateUserException();
