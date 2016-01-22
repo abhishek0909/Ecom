@@ -15,15 +15,13 @@ import com.savi.ecom.user.api.LoginRequest;
 @Service
 public class UserServiceImpl implements UserService {
 	
-
+    @Autowired
 	private UserRepository userRepository;
-	private UserConvertor userConvertor;
 	
 	@Autowired
-	public void setUserRepository(UserRepository userRepository,UserConvertor userConvertor) {
-		this.userRepository = userRepository;
-		this.userConvertor = userConvertor;
-	}
+	private UserConvertor userConvertor;
+	
+	
 
 	
 	public boolean login(LoginRequest request){

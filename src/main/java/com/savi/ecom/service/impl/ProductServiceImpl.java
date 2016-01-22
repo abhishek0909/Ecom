@@ -12,16 +12,13 @@ import com.savi.ecom.service.ProductService;
 @Service
 public class ProductServiceImpl implements ProductService {
 
+	@Autowired
 	private ProductRepository productRepository;
-	private ProductConvertor productConvertor;
 	
 	@Autowired
-	public ProductServiceImpl(ProductRepository productRepository,ProductConvertor productConvertor){
-		
-		this.productRepository = productRepository;
-		this.productConvertor = productConvertor;
-		
-	}
+	private ProductConvertor productConvertor;
+	
+	
 	
 	
 	public String createProduct(ProductDTO prod){

@@ -21,17 +21,13 @@ import com.savi.ecom.model.VerificationToken;
 
 @Service("verificationTokenService")
 public class VerificationTokenServiceImpl {
-	
+	@Autowired
 	private VerificationTokenRepository tokenRepository;
+	@Autowired
     private UserRepository userRepository;
+	@Autowired
     private ApplicationConfig config;
 
-    @Autowired
-    public VerificationTokenServiceImpl( UserRepository userRepo, VerificationTokenRepository tokenRepo){
-    	this.tokenRepository = tokenRepo;
-    	this.userRepository = userRepo;    	
-    	
-    }
     
     @Transactional
     public VerificationToken sendEmailRegistrationToken(String userId) {
