@@ -1,9 +1,13 @@
 package com.savi.ecom.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.env.Environment;
+
+import com.savi.ecom.convertor.ProductConvertor;
+import com.savi.ecom.convertor.UserConvertor;
 
 @Configuration
 @PropertySource({"classpath:/properties/app.properties"})
@@ -28,8 +32,9 @@ public class ApplicationConfig {
         return environment.getProperty(HOSTNAME_PROPERTY);
     }
 
+  
    
-
+   
     public int getEmailRegistrationTokenExpiryTimeInMinutes() {
         return Integer.parseInt(environment.getProperty(TOKEN_EMAIL_REGISTRATION_DURATION));
     }

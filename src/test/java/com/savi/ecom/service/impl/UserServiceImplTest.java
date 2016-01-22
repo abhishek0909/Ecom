@@ -9,6 +9,7 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import com.savi.ecom.dto.UserDTO;
 import com.savi.ecom.model.UserModel;
 import com.savi.ecom.user.api.LoginRequest;
 
@@ -43,7 +44,7 @@ public class UserServiceImplTest {
 	
 	@Test
 	public void createUser(){
-		UserModel user = new UserModel();
+		UserDTO user = new UserDTO();
 		
 		String uuid = UUID.randomUUID().toString();
 		String email = "gaurav" + uuid + "@abc.com";

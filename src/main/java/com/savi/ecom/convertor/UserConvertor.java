@@ -1,7 +1,10 @@
 package com.savi.ecom.convertor;
 
+import org.springframework.stereotype.Component;
+
 import com.savi.ecom.dto.UserDTO;
 import com.savi.ecom.model.UserModel;
+
 
 public class UserConvertor implements IConvertor<UserModel, UserDTO> {
 
