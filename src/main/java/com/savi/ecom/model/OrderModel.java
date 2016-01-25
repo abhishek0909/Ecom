@@ -1,5 +1,6 @@
 package com.savi.ecom.model;
 
+import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -24,19 +25,17 @@ public class OrderModel extends Model {
 	 
 	public String userId;
 	
-	/** The order id. */
-	public String orderId;
+	
 	
 	/** The total price. */
 	public double totalPrice;
 	
 	/** The entries. */
-	@OneToMany(mappedBy="orderId",
+	@OneToMany(mappedBy="order",
             targetEntity=OrderEntryModel.class,
             cascade= CascadeType.ALL)
-	@LazyCollection(LazyCollectionOption.FALSE)
 	
-	public Set<OrderEntryModel> entries;
+	public Set<OrderEntryModel> entries = new HashSet<OrderEntryModel>();
 	
 	/** The active. */
 	public boolean active;
@@ -88,23 +87,7 @@ public class OrderModel extends Model {
 	/** The status. */
 	public boolean status;
 
-	/**
-	 * Gets the order id.
-	 *
-	 * @return the order id
-	 */
-	public String getOrderId() {
-		return orderId;
-	}
-
-	/**
-	 * Sets the order id.
-	 *
-	 * @param orderId the new order id
-	 */
-	public void setOrderId(String orderId) {
-		this.orderId = orderId;
-	}
+	
 
 	/**
 	 * Gets the total price.

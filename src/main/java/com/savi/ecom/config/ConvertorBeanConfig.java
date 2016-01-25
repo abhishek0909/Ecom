@@ -3,6 +3,7 @@ package com.savi.ecom.config;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+import com.savi.ecom.convertor.OrderConvertor;
 import com.savi.ecom.convertor.ProductConvertor;
 import com.savi.ecom.convertor.UserConvertor;
 
@@ -20,5 +21,11 @@ public class ConvertorBeanConfig {
 	   public ProductConvertor productConvertor(){
 		   
 		   return new ProductConvertor();
+	   }
+	   
+	   @Bean
+	   public OrderConvertor orderConvertor(){
+		   
+		   return new OrderConvertor();
 	   }
 }

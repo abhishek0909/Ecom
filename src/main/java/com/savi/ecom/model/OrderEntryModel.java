@@ -12,9 +12,8 @@ import javax.persistence.Table;
 @Table(name="order_entry")
 public class OrderEntryModel extends Model{
 	
-	 @ManyToOne(targetEntity=OrderModel.class)
-	 @JoinColumn(name = "order_id")
-	public OrderModel orderId;
+	 @ManyToOne
+	public OrderModel order;
 	 
 	/** The product. */	 
 	 
@@ -30,12 +29,12 @@ public class OrderEntryModel extends Model{
 
 	
 
-	public OrderModel getOrderId() {
-		return orderId;
+	public OrderModel getOrder() {
+		return order;
 	}
 
-	public void setOrderId(OrderModel orderId) {
-		this.orderId = orderId;
+	public void setOrder(OrderModel orderId) {
+		this.order = orderId;
 	}
 
 	public String getProductId() {
