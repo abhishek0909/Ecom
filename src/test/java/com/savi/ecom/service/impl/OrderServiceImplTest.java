@@ -12,6 +12,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.savi.ecom.dto.OrderDTO;
 import com.savi.ecom.dto.OrderEntryDTO;
+import com.savi.ecom.model.OrderModel;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration("classpath:spring-dbtest-config.xml")
@@ -48,11 +49,19 @@ public class OrderServiceImplTest {
 		
 		orderService.createOrder(orderDto);
 		
+	}
+	
+	@Test
+	public void getOrder(){
 		
+		OrderModel order = orderService.getOrder("4c0b91c1-7e0f-4413-aeac-a6185e6d0494");
 		
+		System.out.println(order.getUserId() + "::" + order.getTotalPrice());
 		
+		System.out.println(order.getEntries().size());
 		
 	}
+	
 	
 	
 	

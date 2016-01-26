@@ -29,4 +29,14 @@ public class ProductServiceImpl implements ProductService {
 		
 		return product.getSlug();
 	}
+
+
+
+
+	public ProductModel getProductByUuid(String string) {
+		
+		ProductModel product = productRepository.findByUuid(string);
+		
+		return product;
+	}
 }

@@ -47,4 +47,10 @@ public class OrderServiceImpl implements OrderService {
 		
 	}
 
+
+	public OrderModel getOrder(String str) {
+		// TODO Auto-generated method stub
+		return orderRepository.findByUuid(str);
+	}
+
 }
