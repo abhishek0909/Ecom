@@ -12,7 +12,7 @@ import javax.persistence.Table;
 @Table(name="order_entry")
 public class OrderEntryModel extends Model{
 	
-	 @ManyToOne
+	 @ManyToOne	
 	public OrderModel order;
 	 
 	/** The product. */	 
@@ -34,7 +34,7 @@ public class OrderEntryModel extends Model{
 	}
 
 	public void setOrder(OrderModel orderId) {
-		this.order = orderId;
+		this.order= orderId;
 	}
 
 	public String getProductId() {

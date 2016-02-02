@@ -54,7 +54,7 @@ public class OrderServiceImplTest {
 	@Test
 	public void getOrder(){
 		
-		OrderModel order = orderService.getOrder("4c0b91c1-7e0f-4413-aeac-a6185e6d0494");
+		OrderModel order = orderService.getOrder("a6084b4b-b07b-4161-b5d3-7591a1d8bc41");
 		
 		System.out.println(order.getUserId() + "::" + order.getTotalPrice());
 		

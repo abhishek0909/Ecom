@@ -14,7 +14,7 @@ public class OrderConvertor implements IConvertor<OrderModel, OrderDTO>{
 		
 		OrderModel order = new OrderModel();
 		
-		order.setUserId(input.getOrderId());
+		order.setUserId(input.getUserId());
 		
 		Set<OrderEntryModel> items = new HashSet<OrderEntryModel>();
 		
@@ -25,6 +25,7 @@ public class OrderConvertor implements IConvertor<OrderModel, OrderDTO>{
 			item.setProductId(dto.getProductId());
 			item.setQuantity(dto.getQuantity());
 			item.setPrice(dto.getPrice());
+			item.setOrder(order);
 			items.add(item);
 			
 		}

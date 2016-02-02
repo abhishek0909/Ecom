@@ -32,7 +32,6 @@ public class OrderModel extends Model {
 	
 	/** The entries. */
 	@OneToMany(mappedBy="order",
-            targetEntity=OrderEntryModel.class,
             cascade= CascadeType.ALL)
 	
 	public Set<OrderEntryModel> entries = new HashSet<OrderEntryModel>();
